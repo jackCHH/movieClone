@@ -2,6 +2,10 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except:[:index, :show]
 
+  def autocomplete
+    render json: Movie.search(params[:query], autocomplete: true, limit: 10).map(&:title)
+  end
+
   def search
     if params[:search].present?
       @movies = Movie.search(params[:search])

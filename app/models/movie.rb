@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-	searchkick
+	searchkick autocomplete: ['title']
 	belongs_to :user
 	has_many :reviews
 
